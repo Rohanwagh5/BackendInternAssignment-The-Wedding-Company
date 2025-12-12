@@ -14,7 +14,6 @@ class AdminLoginAPI(MethodView):
         if not email or not password:
             return jsonify({"msg": "email and password required"}), 400
 
-        # <- use the canonical config key set in app.create_app()
         master_db = current_app.config["MASTER_DB"]
 
         admin = get_admin_by_email(master_db, email)

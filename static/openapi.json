@@ -1,0 +1,142 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Organization Management API",
+    "version": "1.0.0",
+    "description": "API for the assignment: create/update/delete organizations, admin login."
+  },
+  "servers": [
+    { "url": "http://localhost:5000", "description": "Local server" }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "CreateOrg": {
+        "type": "object",
+        "required": ["organization_name","email","password"],
+        "properties": {
+          "organization_name": { "type": "string" },
+          "email": { "type": "string" },
+          "password": { "type": "string" }
+        }
+      },
+      "UpdateOrg": {
+        "type": "object",
+        "required": ["organization_name"],
+        "properties": {
+          "organization_name": { "type": "string" },
+          "new_organization_name": { "type": "string" },
+          "email": { "type": "string" },
+          "password": { "type": "string" }
+        }
+      },
+      "DeleteOrg": {
+        "type": "object",
+        "required": ["organization_name"],
+        "properties": { "organization_name": { "type": "string" } }
+      },
+      "Login": {
+        "type": "object",
+        "required": ["email","password"],
+        "properties": {
+          "email": { "type": "string" },
+          "password": { "type": "string" }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Health check",
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/org/create": {
+      "post": {
+        "summary": "Create organization",
+        "requestBody": {
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/CreateOrg" } }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": { "description": "Created" },
+          "400": { "description": "Bad Request" },
+          "409": { "description": "Conflict (already exists)" }
+        }
+      }
+    },
+    "/org/get": {
+      "get": {
+        "summary": "Get organization metadata",
+        "parameters": [
+          {
+            "name": "organization_name",
+            "in": "query",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK" },
+          "400": { "description": "Missing param" },
+          "404": { "description": "Not found" }
+        }
+      }
+    },
+    "/org/update": {
+      "put": {
+        "summary": "Update organization (rename + copy collection or admin update)",
+        "requestBody": {
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UpdateOrg" } } },
+          "required": true
+        },
+        "responses": {
+          "200": { "description": "Updated" },
+          "400": { "description": "Bad Request" },
+          "409": { "description": "Conflict" }
+        }
+      }
+    },
+    "/org/delete": {
+      "delete": {
+        "summary": "Delete organization (admin only)",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/DeleteOrg" } } },
+          "required": true
+        },
+        "responses": {
+          "200": { "description": "Deleted" },
+          "401": { "description": "Auth error / Missing token" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not found" }
+        }
+      }
+    },
+    "/admin/login": {
+      "post": {
+        "summary": "Admin login (returns access_token)",
+        "requestBody": {
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Login" } } },
+          "required": true
+        },
+        "responses": {
+          "200": { "description": "Login OK (returns access_token)" },
+          "400": { "description": "Bad Request" },
+          "401": { "description": "Invalid creds" }
+        }
+      }
+    }
+  }
+}
