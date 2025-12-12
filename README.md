@@ -1,47 +1,50 @@
-How to run the project :
+# How to Run the Project
 
-Prerequisites
+## 🚀 Prerequisites
 Make sure the following are installed on your system:
 
-Python 3.10+
+- **Python 3.10+**
+- **pip** (Python package manager)
+- **MongoDB Atlas** or **Local MongoDB** (default port 27017)
 
-pip (Python package manager)
+---
 
-MongoDB (running locally on default port 27017)
+## 📥 Clone the Repository
 
-Clone the Repository
+```bash
 git clone https://github.com/Rohanwagh5/BackendInternAssignment-The-Wedding-Company
+cd BackendInternAssignment-The-Wedding-Company
+
 
 Create Virtual Environment
 python -m venv venv
 
 Activate it:
-
-Windows:
-venv\Scripts\activate
-
-macOS / Linux:
-source venv/bin/activate
+Windows: venv\Scripts\activate
+macOS / Linux: source venv/bin/activate
 
 Install Dependencies
 pip install -r requirements.txt
 
 Configure Environment Variables
+
 Create a .env file in the project root and add:
-
-MONGO_URI=MONGO_URI=mongodb+srv://rohanwagh52005:6iIDo7fC20778zWL@cluster0.c70xh.mongodb.net/Organisation_DB
-
+MONGO_URI=mongodb+srv://rohanwagh52005:6iIDo7fC20778zWL@cluster0.c70xh.mongodb.net/Organisation_DB
 MASTER_DB=Organisation_DB
 JWT_SECRET_KEY=secret123
 JWT_EXPIRES_SECONDS=3600
-
-(Sharing ENV only because assignment requires database testing access.)
+Note: ENV is shared only because the assignment database testing access.
 
 Run the Application
 python run.py
 
-After running, the backend will be available at:
-http://localhost:5000
+
+Your backend will be available at:
+
+👉 http://localhost:5000
+
+
+API Reference
 
 API Reference :
 
