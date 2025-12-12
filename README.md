@@ -46,3 +46,5 @@ Body :
 {
   "organization_name": "Google India"
 }
+
+Can use the Postman to test the api-endpoints or can use the /docs endpoint (Swagger UI to test the endpoints) -> http://localhost:5000/docs
