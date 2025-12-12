@@ -12,8 +12,6 @@ MongoDB (running locally on default port 27017)
 Clone the Repository
 git clone https://github.com/Rohanwagh5/BackendInternAssignment-The-Wedding-Company
 
-cd BackendInternAssignment-The-Wedding-Company
-
 Create Virtual Environment
 python -m venv venv
 
