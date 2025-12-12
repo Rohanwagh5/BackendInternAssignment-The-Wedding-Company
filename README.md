@@ -29,8 +29,8 @@ pip install -r requirements.txt
 Configure Environment Variables
 Create a .env file in the project root and add:
 
-MONGO_URI=mongodb+srv://rohanwagh52005:6iIDo7fC20778zWL@cluster0.c70xh.mongodb.net
-/
+MONGO_URI=MONGO_URI=mongodb+srv://rohanwagh52005:6iIDo7fC20778zWL@cluster0.c70xh.mongodb.net/Organisation_DB
+
 MASTER_DB=Organisation_DB
 JWT_SECRET_KEY=secret123
 JWT_EXPIRES_SECONDS=3600
