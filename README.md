@@ -98,9 +98,9 @@ Testing the APIs
 
 You can test the APIs using:
 
-Postman
+1.Postman
 
-Swagger UI (recommended)
+2. Swagger UI (recommended) :
 Swagger UI URL:
 http://localhost:5000/docs
 
