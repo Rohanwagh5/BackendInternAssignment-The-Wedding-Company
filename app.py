@@ -2,6 +2,7 @@ from flask import Flask, g
 from config import Config
 from pymongo import MongoClient
 from flask_jwt_extended import JWTManager
+from flask_swagger_ui import get_swaggerui_blueprint
 import os
 
 def create_app():
@@ -20,6 +21,15 @@ def create_app():
     from views.auth import auth_bp
     app.register_blueprint(org_bp)
     app.register_blueprint(auth_bp)
+
+    SWAGGER_URL = "/docs"                 
+    API_URL = "/static/openapi.json"      
+    swagger_bp = get_swaggerui_blueprint(
+        SWAGGER_URL,
+        API_URL,
+        config={ "app_name": "Organization Management API" }
+    )
+    app.register_blueprint(swagger_bp, url_prefix=SWAGGER_URL)
 
     @app.route("/")
     def health():
